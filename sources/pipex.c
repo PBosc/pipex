@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/23 01:54:34 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/23 05:28:04 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,16 @@ static int	pipes(t_data *data)
 static int	exec(t_data *data)
 {
 	char	**cmd;
+	char	**paths;
 
 	cmd = ft_split(data->argv[data->cmd_id], ' ');
+	paths = get_path(data->env);
+	cmd[0] = get_valid_path(paths, cmd[0]);
+	if (!cmd[0])
+		return (free_tab_2d(cmd), EXIT_FAILURE);
 	execve(cmd[0], cmd, data->env);
 	free_tab_2d(cmd);
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 static int	pipex(t_data *data)
@@ -84,5 +89,13 @@ int	main(int argc, char **argv, char **env)
 	if (!init_args(data, argc, argv, env))
 		return (free(data), EXIT_FAILURE);
 	pipex(data);
+	free(data);
+	// char **path;
+	// int i = 0;
+	// path = get_path(env);
+	// char *cmd_path = get_valid_path(path, argv[1]);
+	// printf("%s\n", cmd_path);
+	// free(cmd_path);
+	// free_tab_2d(path);
 	return (0);
 }

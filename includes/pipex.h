@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:18 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/23 01:55:25 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/23 05:20:52 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ typedef struct s_data {
 
 t_data	*init_args(t_data *data, int argc, char **argv, char **env);
 void	free_tab_2d(char **tab);
+char	**get_path(char **env);
+char	*get_valid_path(char **paths, char *cmd);
 
 #endif

@@ -9,13 +9,14 @@ LIBFT_INCLUDES 	= libft/includes/
 LIBFT 			= libft
 
 FILES 			= 	pipex		\
-					init
+					init		\
+					path
 
 SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
 OBJS 			= ${SRCS:.c=.o}
 
-CFLAGS 			= -Wall -Wextra -Werror
+# CFLAGS 			= -Wall -Wextra -Werror
 
 # CURSOR MOVEMENTS
 MOV_U			= \033[1A
