@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:14:06 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/16 21:06:29 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/24 02:00:29 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_list
 
 # define HEX_BASE_LOW "0123456789abcdef"
 # define HEX_BASE_UP "0123456789ABCDEF"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
@@ -60,6 +63,7 @@ int		ft_putnbr_fd(int n, int fd);
 int		ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
+int		ft_strcmp(char *s1, char *s2);
 char	*ft_strdup(const char *s);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 char	*ft_strjoin(const char *s1, const char *s2);
@@ -74,5 +78,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+char	*get_next_line(int fd);
 
 #endif

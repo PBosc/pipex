@@ -2,6 +2,8 @@ NAME 			= pipex
 
 CC 				= gcc
 
+BONUS			= pipex_bonus
+
 INCLUDES		= includes/
 
 LIBFT_INCLUDES 	= libft/includes/
@@ -10,7 +12,8 @@ LIBFT 			= libft
 
 FILES 			= 	pipex		\
 					init		\
-					path
+					path		\
+					here_docs
 
 SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
@@ -53,6 +56,9 @@ clean 	:
 		@make clean --no-print-directory -C libft/
 		@rm -rf ${OBJS} ${BOBJS}
 		@echo "${BLUE} Cleaned ${RESET}"
+
+bonus: all
+		@cp $(NAME) $(BONUS)
 
 fclean	: clean
 		@make fclean --no-print-directory -C libft/

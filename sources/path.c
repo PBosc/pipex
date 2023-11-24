@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 05:05:05 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/23 05:23:42 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/23 23:12:37 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*get_valid_path(char **paths, char *cmd)
 	char	*cmd_path;
 
 	i = 0;
+	if (cmd[0] == '.' || cmd[0] == '/')
+		return (cmd);
 	while (paths[i])
 	{
 		printf("%s\n", paths[i]);

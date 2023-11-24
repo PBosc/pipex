@@ -6,13 +6,14 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/23 05:28:04 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/24 16:47:32 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "pipex.h"
 
-static int	pipes(t_data *data)
+static int	child_pipes(t_data *data)
 {
 	if (data->cmd_id == 2)
 	{
@@ -65,7 +66,7 @@ static int	pipex(t_data *data)
 		pid = fork();
 		if (!pid)
 		{
-			if (pipes(data) == EXIT_FAILURE)
+			if (child_pipes(data) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
 			exec(data);
 		}
@@ -90,12 +91,5 @@ int	main(int argc, char **argv, char **env)
 		return (free(data), EXIT_FAILURE);
 	pipex(data);
 	free(data);
-	// char **path;
-	// int i = 0;
-	// path = get_path(env);
-	// char *cmd_path = get_valid_path(path, argv[1]);
-	// printf("%s\n", cmd_path);
-	// free(cmd_path);
-	// free_tab_2d(path);
 	return (0);
 }

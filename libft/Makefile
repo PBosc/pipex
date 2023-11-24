@@ -48,13 +48,15 @@ FILES 		= 	ft_atoi				\
 				ft_lstmap			\
 				ft_lstnew			\
 				ft_lstsize			\
-				ft_printf_utils
+				ft_printf_utils		\
+				get_next_line		\
+				ft_strcmp
 
 SRCS = $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
 OBJS 	= ${SRCS:.c=.o}
 
-CFLAGS 	= -Wall -Wextra -Werror
+CFLAGS 	= -Wall -Wextra -Werror -fPIE
 
 
 ${NAME} : 	${OBJS}
