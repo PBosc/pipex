@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:18 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/24 02:10:46 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:52:44 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ t_data	*init_args(t_data *data, int argc, char **argv, char **env);
 void	free_tab_2d(char **tab);
 char	**get_path(char **env);
 char	*get_valid_path(char **paths, char *cmd);
-int		read_here_doc(t_hered *here_doc, t_data *data);
+t_hered	*read_here_doc(t_hered *here_doc, t_data *data);
 int		write_here_doc(t_hered *here_doc, t_data *data);
+int		check_args(t_data *data);
 
 #endif

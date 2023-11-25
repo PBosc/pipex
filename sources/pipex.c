@@ -6,12 +6,23 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/24 16:47:32 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/25 21:05:37 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "pipex.h"
+
+static int	get_fd_out(t_data *data)
+{
+	if (!data->is_here_doc)
+		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY
+				| O_CREAT | O_TRUNC, 666);
+	else
+		data->fd_out = open(data->argv[data->argc - 1], O_WRONLY
+				| O_CREAT | O_APPEND, 666);
+	return (data->fd_out);
+}
 
 static int	child_pipes(t_data *data)
 {
@@ -26,8 +37,7 @@ static int	child_pipes(t_data *data)
 		dup2(data->prev_pipe, STDIN_FILENO);
 	if (data->cmd_id == data->argc - 2)
 	{
-		data->fd_out = open(data->argv[data->argc - 1],
-				O_WRONLY | O_CREAT | O_TRUNC, 666);
+		data->fd_out = get_fd_out(data);
 		if (data->fd_out == -1)
 			return (perror("open"), EXIT_FAILURE);
 		dup2(data->fd_out, STDOUT_FILENO);
@@ -36,6 +46,8 @@ static int	child_pipes(t_data *data)
 		dup2(data->pipe[1], STDOUT_FILENO);
 	if (data->prev_pipe != -1)
 		close(data->prev_pipe);
+	close(data->pipe[0]);
+	data->is_here_doc = 0;
 	return (EXIT_SUCCESS);
 }
 
@@ -87,7 +99,11 @@ int	main(int argc, char **argv, char **env)
 	t_data	*data;
 
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (perror("malloc"), EXIT_FAILURE);
 	if (!init_args(data, argc, argv, env))
+		return (free(data), EXIT_FAILURE);
+	if (!check_args(data))
 		return (free(data), EXIT_FAILURE);
 	pipex(data);
 	free(data);

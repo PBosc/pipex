@@ -19,7 +19,7 @@ SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
 OBJS 			= ${SRCS:.c=.o}
 
-# CFLAGS 			= -Wall -Wextra -Werror
+CFLAGS 			= -g
 
 # CURSOR MOVEMENTS
 MOV_U			= \033[1A
@@ -58,11 +58,12 @@ clean 	:
 		@echo "${BLUE} Cleaned ${RESET}"
 
 bonus: all
-		@cp $(NAME) $(BONUS)
+		@mv $(NAME) $(BONUS)
 
 fclean	: clean
 		@make fclean --no-print-directory -C libft/
 		@rm -rf ${NAME}
+		@rm -rf ${BONUS}
 
 re		: fclean all
 

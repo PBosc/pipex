@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 00:15:19 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/24 03:01:59 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/25 20:45:57 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	ft_lstpush_back(t_hered **lst, char *line)
 	return (1);
 }
 
-int	read_here_doc(t_hered *here_doc, t_data *data)
+t_hered	*read_here_doc(t_hered *here_doc, t_data *data)
 {
 	char	*line;
 
@@ -62,13 +62,13 @@ int	read_here_doc(t_hered *here_doc, t_data *data)
 		ft_putstr_fd("> ", STDIN_FILENO);
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
-			return (get_next_line(-42), perror("malloc"), 0);
+			return (get_next_line(-42), perror("malloc"), NULL);
 		if (is_limit(line, data->limiter))
-			return (free(line), 1);
+			return (free(line), here_doc);
 		if (!ft_lstpush_back(&here_doc, line))
-			return (get_next_line(-42), perror("malloc list"), 0);
+			return (get_next_line(-42), perror("malloc list"), NULL);
 	}
-	return (-1);
+	return (NULL);
 }
 
 int	write_here_doc(t_hered *here_doc, t_data *data)
@@ -78,8 +78,7 @@ int	write_here_doc(t_hered *here_doc, t_data *data)
 	node = here_doc;
 	while (node)
 	{
-		write(data->pipe[1], node->line,
-			ft_strlen(node->line)) != ft_strlen(node->line);
+		write(data->pipe[1], node->line, ft_strlen(node->line));
 		node = node->next;
 	}
 	return (1);
