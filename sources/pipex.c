@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/25 21:05:37 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/25 22:01:00 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int	main(int argc, char **argv, char **env)
 		return (free(data), EXIT_FAILURE);
 	pipex(data);
 	free(data);
+	get_next_line(-42);
 	return (0);
 }

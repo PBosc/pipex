@@ -13,7 +13,8 @@ LIBFT 			= libft
 FILES 			= 	pipex		\
 					init		\
 					path		\
-					here_docs
+					here_docs	\
+					clean
 
 SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 

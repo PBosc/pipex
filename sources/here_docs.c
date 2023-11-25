@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 00:15:19 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/25 20:45:57 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/25 23:00:02 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,12 @@ t_hered	*read_here_doc(t_hered *here_doc, t_data *data)
 		line = get_next_line(STDIN_FILENO);
 		if (!line)
 			return (get_next_line(-42), perror("malloc"), NULL);
-		if (is_limit(line, data->limiter))
-			return (free(line), here_doc);
 		if (!ft_lstpush_back(&here_doc, line))
-			return (get_next_line(-42), perror("malloc list"), NULL);
+			return (free(line),
+				get_next_line(-42), perror("malloc list"), NULL);
+		if (is_limit(line, data->limiter))
+			return (get_next_line(-42), free(line), here_doc);
+		free(line);
 	}
 	return (NULL);
 }
