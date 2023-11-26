@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 17:26:14 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/26 01:56:57 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/26 02:08:40 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,15 @@ char	*get_next_line(int fd)
 	static char	*save;
 	char		*line;
 
-	if (BUFFER_SIZE <= 0 || fd < 0)
-		return (NULL);
 	if (fd == -42)
 		return (free(save), NULL);
+	if (BUFFER_SIZE <= 0 || fd < 0)
+		return (NULL);
 	save = read_line(save, fd);
 	if (!save)
 		return (NULL);
 	line = get_first_line(save);
-	save = get_end(save);
+	if (line[ft_strlen(line) - 1] == '\n')
+		save = get_end(save);
 	return (line);
 }

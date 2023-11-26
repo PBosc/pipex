@@ -20,7 +20,7 @@ SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
 OBJS 			= ${SRCS:.c=.o}
 
-CFLAGS 			= -g
+CFLAGS 			= -Wall -Wextra -Werror
 
 # CURSOR MOVEMENTS
 MOV_U			= \033[1A
