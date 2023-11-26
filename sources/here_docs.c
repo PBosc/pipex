@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 00:15:19 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/25 23:00:02 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/26 01:56:34 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ t_hered	*read_here_doc(t_hered *here_doc, t_data *data)
 				get_next_line(-42), perror("malloc list"), NULL);
 		if (is_limit(line, data->limiter))
 			return (get_next_line(-42), free(line), here_doc);
-		free(line);
 	}
 	return (NULL);
 }

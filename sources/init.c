@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 01:23:50 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/25 22:30:41 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/26 01:55:41 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	init_heredoc(t_data *data)
 		get_next_line(-42);
 		close(data->pipe[0]);
 		close(data->pipe[1]);
-		return (free_heredoc(heredoc), EXIT_SUCCESS);
+		free_heredoc(heredoc);
+		exit(EXIT_SUCCESS);
 	}
 	get_next_line(-42);
 	close(data->pipe[1]);
