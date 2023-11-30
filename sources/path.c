@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 05:05:05 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 04:58:41 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 05:51:25 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ char	*get_valid_path(char **paths, char *cmd)
 		i++;
 	}
 	free_tab_2d(paths);
-	ft_printf("%s: command not found\n", cmd);
 	return (NULL);
 }
 

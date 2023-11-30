@@ -14,7 +14,8 @@ FILES 			= 	pipex		\
 					init		\
 					path		\
 					here_docs	\
-					clean
+					clean		\
+					errors
 
 SRCS 			= $(addsuffix .c, $(addprefix sources/, $(FILES)))
 
