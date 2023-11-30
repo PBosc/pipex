@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:40:30 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 02:24:33 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:06:53 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,12 @@ void	free_tab_2d(char **tab)
 	free(tab);
 }
 
-int	handle_process(t_data *data, int pid)
+int	handle_process(t_data *data, char *path, char **cmd, int pid)
 {
-	char	**cmd;
-	char	*path;
-
 	if (!pid)
 	{
 		if (child_pipes(data) == EXIT_FAILURE)
 			return (0);
-		cmd = ft_split(data->argv[data->cmd_id], ' ');
-		if (!cmd)
-			return (EXIT_FAILURE);
-		path = get_valid_path(get_path(data->env), cmd[0]);
-		if (!path)
-			return (free_tab_2d(cmd), EXIT_FAILURE);
 		exec(data, path, cmd);
 		exit(EXIT_FAILURE);
 	}
@@ -63,5 +54,6 @@ int	handle_process(t_data *data, int pid)
 		data->prev_pipe = data->pipe[0];
 		close(data->pipe[1]);
 	}
+	free_tab_2d(cmd);
 	return (1);
 }

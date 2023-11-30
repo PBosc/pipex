@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 02:23:40 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:05:34 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,21 @@ static int	pipex(t_data *data)
 {
 	pid_t	pid;
 	int		status;
+	char	**cmd;
+	char	*path;
 
 	while (data->cmd_id < data->argc - 1 && !data->failed)
 	{
+		cmd = ft_split(data->argv[data->cmd_id], ' ');
+		path = get_valid_path(get_path(data->env), cmd[0]);
+		if (!path)
+			return (free_tab_2d(cmd), EXIT_FAILURE);
 		if (pipe(data->pipe) == -1)
-			return (perror("pipe"), EXIT_FAILURE);
+			return (free_tab_2d(cmd), perror("pipe"), EXIT_FAILURE);
 		pid = fork();
-		if (!handle_process(data, pid))
-			return (EXIT_FAILURE);
+		if (!handle_process(data, path, cmd, pid))
+			return (free(path), free_tab_2d(cmd), EXIT_FAILURE);
+		free(path);
 		++data->cmd_id;
 	}
 	return (wait(&status), EXIT_SUCCESS);
