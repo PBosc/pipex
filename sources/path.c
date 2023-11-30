@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 05:05:05 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 02:09:38 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 04:58:41 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ char	**get_path(char **env)
 		}
 		i++;
 	}
-	printf("PATH not found\n");
+	ft_printf("PATH not found\n");
 	return (NULL);
+}
+
+int	check_outfile(t_data *data)
+{
+	if (access(data->argv[data->argc - 1], F_OK) == 0
+		&& access(data->argv[data->argc - 1], W_OK) == -1)
+	{	
+		perror(data->argv[data->argc - 1]);
+		return (0);
+	}
+	return (1);
 }

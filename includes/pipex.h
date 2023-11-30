@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:18 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 01:58:26 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 04:42:03 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ void	free_heredoc(t_hered *here_doc);
 int		handle_process(t_data *data, char *path, char **cmd, int pid);
 int		child_pipes(t_data *data);
 int		exec(t_data *data, char *path, char **cmd);
+int		check_outfile(t_data *data);
 
 #endif
