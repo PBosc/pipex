@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 05:05:05 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/26 04:42:58 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:09:38 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,23 @@ char	*get_valid_path(char **paths, char *cmd)
 {
 	int		i;
 	char	*cmd_path;
+	char	*tmp;
 
 	i = 0;
 	if (cmd[0] == '.' || cmd[0] == '/')
 		return (cmd);
 	while (paths[i])
 	{
-		cmd_path = ft_strjoin(paths[i], "/");
-		cmd_path = ft_strjoin(cmd_path, cmd);
+		tmp = ft_strjoin(paths[i], "/");
+		cmd_path = ft_strjoin(tmp, cmd);
+		free(tmp);
 		if (access(cmd_path, F_OK) == 0)
-			return (cmd_path);
+			return (free_tab_2d(paths), cmd_path);
 		free(cmd_path);
 		i++;
 	}
+	free_tab_2d(paths);
+	ft_printf("%s: command not found\n", cmd);
 	return (NULL);
 }
 
@@ -70,5 +74,6 @@ char	**get_path(char **env)
 		}
 		i++;
 	}
+	printf("PATH not found\n");
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 01:23:50 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/26 03:21:45 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:11:19 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,20 @@ t_data	*init_args(t_data *data, int argc, char **argv, char **env)
 	data->argv = argv;
 	data->argc = argc;
 	data->env = env;
+	data->failed = 0;
 	if (!ft_strcmp(argv[1], "here_doc"))
 	{
 		data->is_here_doc = 1;
+		if (check_args(data) == 0)
+			return (NULL);
 		data->limiter = ft_strdup(argv[2]);
 		init_heredoc(data);
 	}
 	else
 	{
 		data->is_here_doc = 0;
+		if (check_args(data) == 0)
+			return (NULL);
 		data->limiter = NULL;
 	}
 	data->cmd_id = 2 + data->is_here_doc;

@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:18 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/26 03:10:35 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 01:58:26 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_data {
 	char	**env;
 	int		is_here_doc;
 	char	*limiter;
+	int		failed;
 }	t_data;
 
 typedef struct s_hered {
@@ -50,5 +51,8 @@ int		read_here_doc(t_hered **here_doc, t_data *data);
 int		write_here_doc(t_hered *here_doc, t_data *data);
 int		check_args(t_data *data);
 void	free_heredoc(t_hered *here_doc);
+int		handle_process(t_data *data, char *path, char **cmd, int pid);
+int		child_pipes(t_data *data);
+int		exec(t_data *data, char *path, char **cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 21:40:30 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/26 03:10:38 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 02:06:53 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,24 @@ void	free_tab_2d(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+int	handle_process(t_data *data, char *path, char **cmd, int pid)
+{
+	if (!pid)
+	{
+		if (child_pipes(data) == EXIT_FAILURE)
+			return (0);
+		exec(data, path, cmd);
+		exit(EXIT_FAILURE);
+	}
+	else
+	{
+		if (data->prev_pipe != -1)
+			close(data->prev_pipe);
+		data->prev_pipe = data->pipe[0];
+		close(data->pipe[1]);
+	}
+	free_tab_2d(cmd);
+	return (1);
 }
