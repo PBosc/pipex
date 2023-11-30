@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 01:23:50 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 02:11:19 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 04:54:38 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ t_data	*init_args(t_data *data, int argc, char **argv, char **env)
 	data->argc = argc;
 	data->env = env;
 	data->failed = 0;
+	if (data->argc < 5)
+		return (check_args(data), NULL);
 	if (!ft_strcmp(argv[1], "here_doc"))
 	{
 		data->is_here_doc = 1;

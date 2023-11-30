@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/11/30 02:05:34 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/11/30 04:52:48 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	child_pipes(t_data *data)
 	if (data->cmd_id == 2)
 	{
 		data->fd_in = open(data->argv[1], O_RDONLY);
+		check_outfile(data);
 		if (data->fd_in == -1)
 			return (perror(data->argv[1]), EXIT_FAILURE);
 		dup2(data->fd_in, STDIN_FILENO);
@@ -39,7 +40,7 @@ int	child_pipes(t_data *data)
 	{
 		data->fd_out = get_fd_out(data);
 		if (data->fd_out == -1)
-			return (perror(data->argv[data->argc - 1]), EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		dup2(data->fd_out, STDOUT_FILENO);
 	}
 	else
