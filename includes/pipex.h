@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:18 by pibosc            #+#    #+#             */
-/*   Updated: 2023/12/02 14:18:38 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/12/02 15:36:28 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_data {
 	char	**env;
 	int		is_here_doc;
 	char	*limiter;
-	int		failed;
 	char	*path;
 }	t_data;
 

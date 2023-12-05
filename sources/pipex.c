@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/12/02 14:32:51 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/12/02 15:36:44 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	exec(t_data *data, char *path, char **cmd)
 	if (!cmd[0] || access(cmd[0], F_OK) == -1)
 	{
 		free_tab_2d(cmd);
-		data->failed = 1;
 		exit(EXIT_FAILURE);
 	}
 	execve(cmd[0], cmd, data->env);
@@ -72,7 +71,7 @@ static int	pipex(t_data *data)
 	char	**cmd;
 	char	*path;
 
-	while (data->cmd_id < data->argc - 1 && !data->failed)
+	while (data->cmd_id < data->argc - 1)
 	{
 		cmd = ft_split(data->argv[data->cmd_id], ' ');
 		path = get_valid_path(get_path(data->env), cmd[0]);

@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 05:24:40 by pibosc            #+#    #+#             */
-/*   Updated: 2023/12/02 14:32:57 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/12/05 15:54:25 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_input(t_data *data)
 {
-	if (access(data->argv[1], F_OK) == -1
-		|| (access(data->argv[1], F_OK) == 0
-			&& access(data->argv[1], R_OK) == -1))
+	if (!data->is_here_doc && (access(data->argv[1], F_OK) == -1
+			|| (access(data->argv[1], F_OK) == 0
+				&& access(data->argv[1], R_OK) == -1)))
 		perror(data->argv[1]);
 }
 
@@ -55,9 +55,9 @@ void	check_errors(t_data *data)
 	if (access(data->argv[data->argc - 1], F_OK) == 0
 		&& access(data->argv[data->argc - 1], W_OK) == -1)
 		is_output = 1;
-	if (access(data->argv[1], F_OK) == -1
-		|| (access(data->argv[1], F_OK) == 0
-			&& access(data->argv[1], R_OK) == -1))
+	if (data->is_here_doc || (access(data->argv[1], F_OK) == -1
+			|| (access(data->argv[1], F_OK) == 0
+				&& access(data->argv[1], R_OK) == -1)))
 		is_input = 1;
 	check_commands(data, is_output, is_input);
 	if (is_output)
