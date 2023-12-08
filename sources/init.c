@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 01:23:50 by pibosc            #+#    #+#             */
-/*   Updated: 2023/12/02 15:36:23 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:29:33 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_data	*init_args(t_data *data, int argc, char **argv, char **env)
 	data->pipe[0] = -1;
 	data->pipe[1] = -1;
 	data->prev_pipe = -1;
+	data->failed = 0;
 	data->argv = argv;
 	data->argc = argc;
 	data->env = env;

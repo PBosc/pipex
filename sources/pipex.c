@@ -6,7 +6,7 @@
 /*   By: pibosc <pibosc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:41 by pibosc            #+#    #+#             */
-/*   Updated: 2023/12/02 15:36:44 by pibosc           ###   ########.fr       */
+/*   Updated: 2023/12/08 13:48:24 by pibosc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int	exec(t_data *data, char *path, char **cmd)
 static int	pipex(t_data *data)
 {
 	pid_t	pid;
-	int		status;
 	char	**cmd;
 	char	*path;
 
@@ -85,7 +84,8 @@ static int	pipex(t_data *data)
 		free(path);
 		++data->cmd_id;
 	}
-	return (wait(&status), EXIT_SUCCESS);
+	printf("data->ret_value = %d, data->failed = %d\n", data->ret_value, data->failed);
+	return (wait_commands(data, pid));
 }
 
 int	main(int argc, char **argv, char **env)
@@ -100,5 +100,5 @@ int	main(int argc, char **argv, char **env)
 	check_errors(data);
 	pipex(data);
 	free(data);
-	return (0);
+	return (data->ret_value);
 }
